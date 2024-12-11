@@ -39,6 +39,7 @@ export default async function decorate($block) {
   // find metadata
   const title = getMetadata('og:title', doc);
   const desc = getMetadata('og:description', doc);
+  const author = getMetadata('author', doc);
 
   const $pre = document.createElement('p');
   $pre.classList.add('pretitle');
@@ -50,6 +51,9 @@ export default async function decorate($block) {
   const $p = document.createElement('p');
   $p.textContent = desc;
 
+  const $a = document.createElement('a');
+  $a.textContent = "by: " + author;
+
   const $link = document.createElement('div');
   $link.append(link);
   link.textContent = 'Read More';
@@ -57,7 +61,7 @@ export default async function decorate($block) {
 
   const $text = document.createElement('div');
   $text.classList.add('text');
-  $text.append($pre, $h2, $p, $link);
+  $text.append($pre, $h2, $a, $p, $link);
 
   const $image = document.createElement('div');
   $image.classList.add('image');
@@ -68,4 +72,6 @@ export default async function decorate($block) {
   }
 
   $block.replaceChildren($image, $text);
+
+ 
 }
